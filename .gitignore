@@ -1,3 +1,5 @@
+*.out.*
+*.js
 # Logs
 logs
 *.log
