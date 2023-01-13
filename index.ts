@@ -1,5 +1,7 @@
 import { createHttpHandler, get } from './httpGet'
 import { writeFileSync } from 'fs'
+import logger from './logger'
+const LOG_PREFIX = 'index | '
 function chunkify (arr: string[], chunkSize: number): string[][] {
   const result: string[][] = []
   for (let i = 0; i < arr.length; i += chunkSize) {
@@ -12,9 +14,8 @@ function chunkify (arr: string[], chunkSize: number): string[][] {
   }
   return result
 }
+logger.info(LOG_PREFIX+ 'Hello world')
 const hostname = 'google.co.in'
-console.log(chunkify(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'], 2))
-console.log(chunkify(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'], 3))
 const axiosInstance = createHttpHandler('https://' + hostname)
 get(axiosInstance, '').then((response: any) => {
   const urls = response.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gm)
@@ -31,6 +32,6 @@ get(axiosInstance, '').then((response: any) => {
 function filterStaticFiles (url: string) {
   return url.match(/\.(js|pdf|docx?|css|map|jpe?g|png|svg)/gm) == null
 }
-function filterThirdPartyHosts(url: string) {
+function filterThirdPartyHosts (url: string) {
   return url.includes(hostname)
 }
