@@ -25,7 +25,7 @@ get(axiosInstance, '').then((response: any) => {
                             return url.includes(hostname)
                           })
   const chunkedUrls = chunkify(filteredUrls,5)
-  writeFileSync('urls.json', JSON.stringify(chunkedUrls, null, 2))
+  writeFileSync('urls.out.json', JSON.stringify(chunkedUrls, null, 2))
   return chunkedUrls
 }).then((chunkedUrls) =>{
 
