@@ -7,7 +7,7 @@ export function createHttpHandler (baseUrl: string) {
   })
 }
 export async function get (instance: AxiosInstance, path: string) {
-  return await instance.get(path).then(async (response) => {
+  return await instance.get(path).then(async (response:any) => {
     return await new Promise((resolve, reject) => {
       if (response.status !== 200) {
         reject(new Error(response.status + ' is not 200'))
